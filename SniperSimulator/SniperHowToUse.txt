@@ -1,0 +1,11 @@
+* Sniper in General:
+  1. Manual: http://snipersim.org/documents/sniper-manual.pdf
+  2. Main Page: https://snipersim.org//w/The_Sniper_Multi-Core_Simulator
+* Get sniper:
+  1. Copy sniper.tar.gz locally
+  2. tar -xvzf sniper.tar.gz
+  3. You now have a directory called "sniper-new" with everything you need in it (including pin_kit)
+* Run first basic test using "/bin/ls":
+  1. Create a pipe file using: mknod layan.pipe.sift p
+  2. To record trace, run with the ampersand: sniper-new/sniper/record-trace -o layan.pipe -- /bin/ls -p1 &
+  3. To run Sniper with the previous trace and pipe file: sniper-new/sniper/run-sniper -c gainestown -c rob -n 4 --traces=layan.pipe.sift
