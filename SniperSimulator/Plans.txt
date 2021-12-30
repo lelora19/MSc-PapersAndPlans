@@ -1,0 +1,12 @@
+30.12.21:
+For Sniper Simulation:
+1. Go over rob timer and environment and how it's all related to pin (preferrably, document what I can while understanding sniper code) - with Freddy
+2. What files did Dan change so we can merge them into Sniper - with Dan
+3. Micro Arch discussion: what to change in sniper files, what to check for our research. Go over Dan's paper reviews. - with Freddy and Avi
+4. Fix counters casting issue (some time prints are negative) and add counters for power - with Freddy and Avi
+5. *Try* to run with gdb debugger. If it works, it's better than intermediate prints. - Layan (Avi's idea)
+
+For Research Proposal:
+* We want to improve the MicroArch in uOps.
+* Planning to fix and improve over Dan's work: How does the uOp size affect the results, Make timing more accurate, etc.
+* Proposal shuld be 2-3 pages:  1. Our goal; 2. What did Dan do, what do I want to do; 3. Timeline for my work and mini goals.
