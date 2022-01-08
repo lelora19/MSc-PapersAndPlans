@@ -6,7 +6,7 @@ For Sniper Simulation:
 4. Fix counters casting issue (some time prints are negative) and add counters for power - with Freddy and Avi
 5. *Try* to run with gdb debugger. If it works, it's better than intermediate prints. - Layan (Avi's idea)
 
-For Research Proposal:
+For Research Proposal: (Timeline goal: By End of January)
 * We want to improve the MicroArch in uOps.
 * Planning to fix and improve over Dan's work: How does the uOp size affect the results, Make timing more accurate, etc.
-* Proposal shuld be 2-3 pages:  1. Our goal; 2. What did Dan do, what do I want to do; 3. Timeline for my work and mini goals.
+* Proposal shuold be 2-3 pages:  1. Our goal; 2. What did Dan do, what do I want to do; 3. Timeline for my work and mini goals.
