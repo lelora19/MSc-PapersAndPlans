@@ -9,6 +9,7 @@
   1. Create a pipe file using: mknod layan.pipe.sift p
   2. To record trace, run with the ampersand: sniper-new/sniper/record-trace -o layan.pipe -- /bin/ls -p1 &
   3. To run Sniper with the previous trace and pipe file: sniper-new/sniper/run-sniper -c gainestown -c rob -n 4 --traces=layan.pipe.sift
+  + In your work directory (the directory you're issuing your command lines), you'll get "sim.out" file which includes a summary including: num of cycles, memory accesses,  branch prediction, num of operations, etc. 
 * Freddy's overview on ROB Timer and other files in Sniper:
   + https://panoptotech.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=9bfdfef7-5e11-4adb-aaed-ae1200b904dc 
   + PATH: "sniper-new/sniper/common/performance_model/performance_models/rob_performance_model/rob_timer.cc"
@@ -30,4 +31,5 @@
   + There are more models that I might not use: branch_predictor, fastforward_performance_model, queue_model, cache_perf_model, etc.
   + If we're interested in a specific code block, we can *marker* the start and end instruction. This is called "markering".
   + There's a "power stack" options in sniper to get power statistics and draw graphs/plots.
-  
+  + PATH: "sniper-new/sniper/tools/dumpstats.py"
+    - Offers the functionality to collect and print statistics for selected parameters. There's an option to register parameters yourself to collect stats for.
