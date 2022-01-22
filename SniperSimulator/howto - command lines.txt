@@ -1,0 +1,99 @@
+#Compile and run spec2017 speed in test mode
+~/spec2017/bin/runcpu --config=Test-Freddy.cfg --size=test --copies=1 --noreportable --iterations=1 intspeed
+
+#Compile and build only in ref mode
+ ~/spec2017/bin/runcpu --config=Test-Freddy.cfg --size=ref --copies=1 --action build --noreportable --iterations=1 intspeed
+
+#Compile and run specific benchmark(s)
+ ~/spec2017/bin/runcpu --config=Test-Freddy.cfg --size=ref --copies=1 --noreportable --iterations=1 602.gcc_s
+
+#Shows the native command line to run in the benchmark run directory
+specinvoke -n 
+
+#Sniper run command:
+~/sniper-new/sniper/run-sniper -c gainestown -c rob  -n 4 -- < native executable>
+~/sniper-new/sniper/run-sniper -c gainestown -c rob  -n 4 --traces= < trace file>
+
+#generate traces
+~/sniper-new/sniper/record-trace -f <#inst to fast forward> -d <#inst to execute> -o <trace file name> -- <native executable>
+
+#read statistics:
+./tools/dumpstats.py >stat
+
+
+#600.perlbench
+~/sniper-new/sniper/record-trace -f 100000000000 -d 10000000000 -o 600.perlbench.pipe -- ../run_base_refspeed_mytestfreddy-m64.0000/perlbench_s_base.mytestfreddy-m64 -I./lib checkspam.pl 2500 5 25 11 150 1 1 1 1 &
+
+ ~/sniper-new/sniper/run-sniper -c gainestown -c rob  -n 4 --traces=600.perlbench.pipe.sift &
+
+
+#602.gcc
+~/sniper-new/sniper/record-trace -f 0 -d 10000000000 -o 602.gcc.pipe -- ../run_base_refspeed_mytestfreddy-m64.0001/sgcc_base.mytestfreddy-m64 gcc-pp.c -O5 -fipa-pta -o gcc-pp.opts-O5_-fipa-pta.s
+
+
+ ~/sniper-new/sniper/run-sniper -c gainestown -c rob  -n 4 --traces=602.gcc.pipe.sift &
+
+
+#603.bwaves
+~/sniper-new/sniper/record-trace -f 0 -d 10000000000 -o 603.bwaves.pipe -- ../run_base_refspeed_mytestfreddy-m64.0000/speed_bwaves_base.mytestfreddy-m64 bwaves_1 < /home/freddy/spec2017/benchspec/CPU/603.bwaves_s/run/run_base_refspeed_mytestfreddy-m64.0000/bwaves_1.in &
+
+ ~/sniper-new/sniper/run-sniper -c gainestown -c rob  -n 4 --traces=603.bwaves.pipe.sift &
+
+
+#605.mcf
+~/sniper-new/sniper/record-trace -f 0 -d 10000000000 -o 605.mcf.pipe -- ../run_base_refspeed_mytestfreddy-m64.0001/mcf_s_base.mytestfreddy-m64 inp.in &
+~/sniper-new/sniper/record-trace -f 1000000000000 -d 10000000000 -o 605.mcf.pipe -- ../run_base_refspeed_mytestfreddy-m64.0001/mcf_s_base.mytestfreddy-m64 inp.in &
+ ~/sniper-new/sniper/run-sniper -c gainestown -c rob  -n 4 --traces=605.mcf.pipe.sift &
+
+#607.cactuBSSN
+~/sniper-new/sniper/record-trace -f 1000000000000 -d 10000000000 -o 607.cactuBSSN.pipe -- ../run_base_refspeed_mytestfreddy-m64.0000/cactuBSSN_s_base.mytestfreddy-m64 ~/spec2017/benchspec/CPU/607.cactuBSSN_s/run/run_base_refspeed_mytestfreddy-m64.0000/spec_ref.par &
+ ~/sniper-new/sniper/run-sniper -c gainestown -c rob  -n 4 --traces=607.cactuBSSN.pipe.sift &
+
+#619.lbm_s
+~/sniper-new/sniper/record-trace -f 500000000000 -d 10000000000 -o 619.lbm.pipe -- ../run_base_refspeed_mytestfreddy-m64.0000/lbm_s_base.mytestfreddy-m64 2000 reference.dat 0 0 /home/freddy/spec2017/benchspec/CPU/619.lbm_s/run/run_base_refspeed_mytestfreddy-m64.0000/200_200_260_ldc.of &
+ ~/sniper-new/sniper/run-sniper -c gainestown -c rob  -n 4 --traces=619.lbm.pipe.sift &
+
+#620_omnettp
+~/sniper-new/sniper/record-trace -f 1000000000000 -d 10000000000 -o 620.omnettp.pipe -- ../run_base_refspeed_mytestfreddy-m64.0001/omnetpp_s_base.mytestfreddy-m64 -c General -r 0 &
+ ~/sniper-new/sniper/run-sniper -c gainestown -c rob  -n 4 --traces=620.omnettp.pipe.sift &
+
+#621.wrf
+~/sniper-new/sniper/record-trace -f 0 -d 10000000000 -o 621.wrf.pipe -- ../run_base_refspeed_mytestfreddy-m64.0000/wrf_s_base.mytestfreddy-m64 &
+ ~/sniper-new/sniper/run-sniper -c gainestown -c rob  -n 4 --traces=621.wrf.pipe.sift &
+
+#623.xalancbmk
+~/sniper-new/sniper/record-trace -f 1000000000000 -d 10000000000 -o 623.xalancbmk.pipe -- ../run_base_refspeed_mytestfreddy-m64.0001/xalancbmk_s_base.mytestfreddy-m64 -v t5.xml xalanc.xsl &
+
+ ~/sniper-new/sniper/run-sniper -c gainestown -c rob  -n 4 --traces=623.xalancbmk.pipe.sift &
+
+#625.x264
+~/sniper-new/sniper/record-trace -f 1000000000000 -d 10000000000 -o 625.x264.pipe -- ../run_base_refspeed_mytestfreddy-m64.0001/x264_s_base.mytestfreddy-m64 --pass 1 --stats x264_stats.log --bitrate 1000 --frames 1000 -o BuckBunny_New.264 BuckBunny.yuv 1280x720 &
+ ~/sniper-new/sniper/run-sniper -c gainestown -c rob  -n 4 --traces=625.x264.pipe.sift &
+
+#628.pop2
+~/sniper-new/sniper/record-trace -f 0 -d 10000000000 -o 628.pop2.pipe -- ../run_base_refspeed_mytestfreddy-m64.0000/speed_pop2_base.mytestfreddy-m64 &
+ ~/sniper-new/sniper/run-sniper -c gainestown -c rob  -n 4 --traces=628.pop2.pipe.sift &
+
+#631.deepsjeng
+~/sniper-new/sniper/record-trace -f 1000000000000 -d 10000000000 -o 631.deepsjeng.pipe -- ../run_base_refspeed_mytestfreddy-m64.0001/deepsjeng_s_base.mytestfreddy-m64 ref.txt &
+ ~/sniper-new/sniper/run-sniper -c gainestown -c rob  -n 4 --traces=631.deepsjeng.pipe.sift &
+
+#638.imagick
+~/sniper-new/sniper/record-trace -f 1000000000000 -d 10000000000 -o 638.imagick.pipe -- ../run_base_refspeed_mytestfreddy-m64.0000/imagick_s_base.mytestfreddy-m64 -limit disk 0 refspeed_input.tga -resize 817% -rotate -2.76 -shave 540x375 -alpha remove -auto-level -contrast-stretch 1x1% -colorspace Lab -channel R -equalize +channel -colorspace sRGB -define histogram:unique-colors=false -adaptive-blur 0x5 -despeckle -auto-gamma -adaptive-sharpen 55 -enhance -brightness-contrast 10x10 -resize 30% refspeed_output.tga &
+ ~/sniper-new/sniper/run-sniper -c gainestown -c rob  -n 4 --traces=638.imagick.pipe.sift &
+
+#641.leela
+~/sniper-new/sniper/record-trace -f 1000000000000 -d 10000000000 -o 641.leela.pipe -- ../run_base_refspeed_mytestfreddy-m64.0001/leela_s_base.mytestfreddy-m64 ref.sgf
+ ~/sniper-new/sniper/run-sniper -c gainestown -c rob  -n 4 --traces=641.leela.pipe.sift &
+
+#644.nab
+~/sniper-new/sniper/record-trace -f 1000000000000 -d 10000000000 -o 644.nab.pipe -- ../run_base_refspeed_mytestfreddy-m64.0000/nab_s_base.mytestfreddy-m64 3j1n 20140317 220 &
+ ~/sniper-new/sniper/run-sniper -c gainestown -c rob  -n 4 --traces=644.nab.pipe.sift &
+
+#648.exchange2
+~/sniper-new/sniper/record-trace -f 1000000000000 -d 10000000000 -o 648.exchange2.pipe -- ../run_base_refspeed_mytestfreddy-m64.0001/exchange2_s_base.mytestfreddy-m64 6 &
+ ~/sniper-new/sniper/run-sniper -c gainestown -c rob  -n 4 --traces=648.exchange2.pipe.sift &
+
+#649.fotonik3d
+~/sniper-new/sniper/record-trace -f 1000000000000 -d 10000000000 -o 649.fotonik3d.pipe -- ../run_base_refspeed_mytestfreddy-m64.0000/fotonik3d_s_base.mytestfreddy-m64  &
+ ~/sniper-new/sniper/run-sniper -c gainestown -c rob  -n 4 --traces=649.fotonik3d.pipe.sift &
