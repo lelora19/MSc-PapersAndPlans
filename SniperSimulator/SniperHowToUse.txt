@@ -9,3 +9,25 @@
   1. Create a pipe file using: mknod layan.pipe.sift p
   2. To record trace, run with the ampersand: sniper-new/sniper/record-trace -o layan.pipe -- /bin/ls -p1 &
   3. To run Sniper with the previous trace and pipe file: sniper-new/sniper/run-sniper -c gainestown -c rob -n 4 --traces=layan.pipe.sift
+* Freddy's overview on ROB Timer and other files in Sniper:
+  + https://panoptotech.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=9bfdfef7-5e11-4adb-aaed-ae1200b904dc 
+  + PATH: "sniper-new/sniper/common/performance_model/performance_models/rob_performance_model/rob_timer.cc"
+    - There's an instance of RobTimer in each core.
+    - All the OoO pipe (Issue instruction, Execute, Commit, etc) is in this file.
+    - The parameters you give to registerStatsMetric() get printed at the end of the simulation, per core.
+    - uop.getMicroOp(): a up can be Load, Store, Branch, Execute (ALU). There's also another type called ShortInstructions.
+  + PATH: "sniper-new/sniper/common/performance_model/performance_models/rob_performance_model/rob_contention_nehalem.cc"
+    - Deals with contentions of the register file.
+    - If there's no contention, doIssue instruction.
+  + PATH: "sniper-new/sniper/common/performance_model/performance_models/micro_op/dynamic_micro_op.cc"
+    - This file has the functions that define an operation: num of source addresses, destination addresses, defines type of operation, etc.
+    - Sub-types of operations: load, store, add/sub, mult/div, branch, generic.
+    - Seems like MicroOp inherets from DynamicMicroOp (Dynamic Wraps MicroOp).
+  + PATH: "sniper-new/sniper/common/performance_model/performance_models/core_model/core_model_nehalem.cc"
+    - Defines the latency to each operation.
+  + PATH: "sniper-new/sniper/common/performance_model/performance_models/performance_model.cc"
+    - Has functions that deal with multi-threading like lock, barrier, synchronize, etc.
+  + There are more models that I might not use: branch_predictor, fastforward_performance_model, queue_model, cache_perf_model, etc.
+  + If we're interested in a specific code block, we can *marker* the start and end instruction. This is called "markering".
+  + There's a "power stack" options in sniper to get power statistics and draw graphs/plots.
+  
