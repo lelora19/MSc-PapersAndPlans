@@ -8,7 +8,8 @@
 * Run first basic test using "/bin/ls":
   1. Create a pipe file using: mknod layan.pipe.sift p
   2. To record trace, run with the ampersand: sniper-new/sniper/record-trace -o layan.pipe -- /bin/ls -p1 &
-  3. To run Sniper with the previous trace and pipe file: sniper-new/sniper/run-sniper -c gainestown -c rob -n 4 --traces=layan.pipe.sift
+  3. To run Sniper with the previous trace and pipe file: sniper-new/sniper/run-sniper -c gainestown -c rob -n 4 --traces=layan.pipe.sift 
+  (with vp, don't use gainestown and rob, instead add "-c vp" or other vp configs)
   + In your work directory (the directory you're issuing your command lines), you'll get "sim.out" file which includes a summary including: num of cycles, memory accesses,  branch prediction, num of operations, etc. 
 * Freddy's overview on ROB Timer and other files in Sniper:
   + https://panoptotech.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=9bfdfef7-5e11-4adb-aaed-ae1200b904dc 
