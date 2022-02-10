@@ -14,3 +14,9 @@ V* Proposal shuold be 2-3 pages:  1. Our goal; 2. What did Dan do, what do I wan
 4.2.22:
 To get the sniper working version without vp:
   * git reset --hard 9d5ea41165ce1bf6efea0ac25d0ef87d927a95c2
+
+10.2.22:
+* run with 1 core (not 4), check if idle time is still negative. If yes, check snipersim website bug fixes and discussion groups about a casting problem.
+* how does different predictors pick which values to predict (index or sum result)?
+* experiment different tests and draw graphs: #loops vs different params (e.g., #instruction or array size)
+
