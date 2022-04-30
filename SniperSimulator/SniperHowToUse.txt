@@ -34,3 +34,6 @@
   + There's a "power stack" options in sniper to get power statistics and draw graphs/plots.
   + PATH: "sniper-new/sniper/tools/dumpstats.py"
     - Offers the functionality to collect and print statistics for selected parameters. There's an option to register parameters yourself to collect stats for.
+  + PATH: "/sniper-new/sniper/common/performance_model/performance_models/rob_performance_model/uopcache.h"
+    - uOp (Micro Operation) Cache implementation.
+  
