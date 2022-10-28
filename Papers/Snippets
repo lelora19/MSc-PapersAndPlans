@@ -1,0 +1,16 @@
+Publish to:
+1. CAL: Comp Arch Letter (4 pages?): we get quick response and feedback
+2. Conferences: Micro or ISCA 2023
+
+
+Pros & Cons of our arch.:
+pro:  slow path is seperate from the fast path
+      we don't need to store the values forever, only during training
+con: flush, power evaluation, what is the area overhead, what is the effect of instruction fetch throughput on value prediction?
+
+
+Short-term plans:
+1. Start with vp simple then add stride/vtage.
+2. Model two flows: correct prediction-> no penalty, dependency was broken
+                    incorrect prediction-> penalty + rollback (flush).
+3. Ports of VRT: 1 for lookup. For snooping: as much as the number of load units of exe
